@@ -134,7 +134,7 @@ class ImageNet_class_conditional_generator():
     def _create_input_batch(self, image):
         return np.repeat(image[None], self.maskgit_cf.eval_batch_size, axis=0).astype(np.float32)
 
-    def create_latent_mask_and_input_tokens_for_image_editing(self, image, bbox, target_label):
+    def create_latent_mask_and_input_tokens_for_image_editing(self, image, bbox, target_label, mask=None):
         imgs = self._create_input_batch(image)
 
         # Encode the images into image tokens
@@ -145,12 +145,15 @@ class ImageNet_class_conditional_generator():
               mutable=False)
 
         # Create the masked tokens
-        latent_mask = np.zeros((self.maskgit_cf.eval_batch_size, self.maskgit_cf.image_size//16, self.maskgit_cf.image_size//16))
-        latent_t = max(0, bbox.top//16-1)
-        latent_b = min(self.maskgit_cf.image_size//16, bbox.height//16+bbox.top//16+1)
-        latent_l = max(0, bbox.left//16-1)
-        latent_r = min(self.maskgit_cf.image_size//16, bbox.left//16+bbox.width//16+1)
-        latent_mask[:, latent_t:latent_b, latent_l:latent_r] = 1
+        if mask is not None:
+            latent_mask = np.stack([mask]*self.maskgit_cf.eval_batch_size,0)
+        else:
+            latent_mask = np.zeros((self.maskgit_cf.eval_batch_size, self.maskgit_cf.image_size//16, self.maskgit_cf.image_size//16))
+            latent_t = max(0, bbox.top//16-1)
+            latent_b = min(self.maskgit_cf.image_size//16, bbox.height//16+bbox.top//16+1)
+            latent_l = max(0, bbox.left//16-1)
+            latent_r = min(self.maskgit_cf.image_size//16, bbox.left//16+bbox.width//16+1)
+            latent_mask[:, latent_t:latent_b, latent_l:latent_r] = 1
 
         masked_tokens = (1-latent_mask) * image_tokens + self.maskgit_cf.transformer.mask_token_id * latent_mask
         masked_tokens = np.reshape(masked_tokens, [self.maskgit_cf.eval_batch_size, -1])
