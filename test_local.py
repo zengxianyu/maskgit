@@ -9,6 +9,19 @@ import maskgit
 from maskgit.utils import visualize_images, read_image_from_url, restore_from_path, draw_image_with_bbox, Bbox
 from maskgit.inference import ImageNet_class_conditional_generator
 
+#os.system("mkdir -p checkpoints/")
+#
+#models_to_download = itertools.product(
+#    *[ ["maskgit", "tokenizer"],   [256, 512] ])
+#
+#for (type_, resolution) in models_to_download:
+#  canonical_path = ImageNet_class_conditional_generator.checkpoint_canonical_path(type_, resolution)
+#  if os.path.isfile(canonical_path):
+#    print(f"Checkpoint for {resolution} {type_} already exists, not downloading again")
+#  else:
+#    source_url = f'https://storage.googleapis.com/maskgit-public/checkpoints/{type_}_imagenet{resolution}_checkpoint'
+#    os.system(f"wget {source_url} -O {canonical_path}")
+
 generator_256 = ImageNet_class_conditional_generator(image_size=256)
 generator_512 = ImageNet_class_conditional_generator(image_size=512)
 arbitrary_seed = 42
