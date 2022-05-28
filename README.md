@@ -4,7 +4,7 @@ Official Jax Implementation of the CVPR 2022 Paper
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/maskgit-masked-generative-image-transformer/image-generation-on-imagenet-512x512)](https://paperswithcode.com/sota/image-generation-on-imagenet-512x512?p=maskgit-masked-generative-image-transformer)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/maskgit-masked-generative-image-transformer/image-generation-on-imagenet-256x256)](https://paperswithcode.com/sota/image-generation-on-imagenet-256x256?p=maskgit-masked-generative-image-transformer)
 
-[[Paper](https://arxiv.org/abs/2202.04200)] [[Project Page](https://masked-generative-image-transformer.github.io/)] [[Demo Colab](https://colab.research.google.com/github/google-research/maskgit/blob/main/MaskGIT_demo.ipynb)]
+[[Paper](https://arxiv.org/abs/2202.04200)] [[Project Page](https://masked-generative-image-transformer.github.io/)] [[Demo Colab](https://colab.research.google.com/github/zengxianyu/maskgit/blob/main/MaskGIT_demo.ipynb)]
 
 ![teaser](imgs/teaser.png)
 
